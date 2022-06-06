@@ -24,6 +24,7 @@ import com.generation.zerowaste.repository.TemaRepository;
 @RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
+	
 	@Autowired
 	private TemaRepository temaRepository;
 
@@ -37,9 +38,9 @@ public class TemaController {
     			.map(resposta -> ResponseEntity.ok(resposta))
     			.orElse(ResponseEntity.notFound().build());
     }
-    @GetMapping("/titulo/{titulo_tema}")
-    public ResponseEntity<List<Tema>> getByTitulo(@PathVariable String titulo_tema) {
-    	return ResponseEntity.ok(temaRepository.findAllByTituloContainingIgnoreCase(titulo_tema));
+    @GetMapping("/titulo/{titulo}")
+    public ResponseEntity<List<Tema>> getByTitulo(@PathVariable String titulo) {
+    	return ResponseEntity.ok(temaRepository.findAllByTituloContainingIgnoreCase(titulo));
     }
     @PostMapping
     public ResponseEntity<Tema> postTema(@Valid @RequestBody Tema tema) {
@@ -47,8 +48,13 @@ public class TemaController {
     }
     @PutMapping
     public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema) {
+    	
+    	if(tema.getId() == null) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    	}
+    	
     	return temaRepository.findById(tema.getId()) 
-    			.map(resposta -> ResponseEntity.ok(resposta))
+    			.map(resposta -> ResponseEntity.ok().body(temaRepository.save(tema)))
     			.orElse(ResponseEntity.notFound().build());
     			
     }
