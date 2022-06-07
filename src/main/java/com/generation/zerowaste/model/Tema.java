@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "tb_temas")
 public class Tema {
@@ -29,7 +31,8 @@ public class Tema {
 	@Size(min = 10, max = 500, message = "O atributo deve conter no minimo 10 e no máximo 500 caractéres")
 	private String descricao;
 
-	 @OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("tema")
 	private List<Postagem> postagem;
 	
 	
