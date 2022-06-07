@@ -1,6 +1,7 @@
 package com.generation.zerowaste.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -51,8 +52,13 @@ public class PostagemController {
 	}
 	
 	@GetMapping("/databetween/{inicio}/{fim}")
-	public ResponseEntity<List<Postagem>> getByDataBetween(@PathVariable LocalDate inicio, @PathVariable LocalDate fim){
-		return ResponseEntity.ok(postagemRepository.findAllByDataBetween(inicio, fim));
+	public ResponseEntity<List<Postagem>> getByDataBetween(@PathVariable String inicio, @PathVariable String fim){
+		
+		LocalDate data_start = LocalDate.parse(inicio, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate data_end = LocalDate.parse(fim, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		
+		return ResponseEntity.ok(postagemRepository.findByDataBetween(data_start, data_end));
 	}
 	
 	@PostMapping

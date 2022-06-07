@@ -33,7 +33,6 @@ public class Postagem {
 	@Size(min =10, max = 1000 , message = "O atributo aceita minímo 10 e no máximo 1000 caractéres")
 	private String texto;
 	
-	@JsonFormat(pattern="dd-MM-yyyy")
 	private LocalDate data;
 	
 	@Size(min =10, max = 255 , message = "O atributo aceita minímo 10 e no máximo 255 caractéres")

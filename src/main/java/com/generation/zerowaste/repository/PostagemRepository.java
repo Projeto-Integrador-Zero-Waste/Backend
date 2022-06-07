@@ -13,6 +13,5 @@ import com.generation.zerowaste.model.Postagem;
 public interface PostagemRepository extends JpaRepository<Postagem, Long>{
 
 	public List<Postagem> findAllByTituloContainingIgnoreCase(@Param("titulo") String titulo);
-	public List<Postagem> findAllByDataBetween(@Param("inicio") LocalDate inicio, @Param("fim") LocalDate fim);
-	
+	public List<Postagem> findByDataBetween(LocalDate inicio, LocalDate fim);
 }
