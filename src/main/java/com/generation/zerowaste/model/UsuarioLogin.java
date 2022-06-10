@@ -11,6 +11,8 @@ public class UsuarioLogin {
 	private String senha;
 
 	private String foto;
+	
+	private String tipo;
 
 	private String token;
 
@@ -54,6 +56,14 @@ public class UsuarioLogin {
 		this.foto = foto;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public String getToken() {
 		return token;
 	}
@@ -62,4 +72,5 @@ public class UsuarioLogin {
 		this.token = token;
 	}
 
+	
 }
