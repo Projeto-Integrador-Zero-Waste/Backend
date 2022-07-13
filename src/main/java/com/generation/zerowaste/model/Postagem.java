@@ -1,6 +1,6 @@
 package com.generation.zerowaste.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,7 +33,8 @@ public class Postagem {
 	@Size(min =10, max = 1000 , message = "O atributo aceita minímo 10 e no máximo 1000 caractéres")
 	private String texto;
 	
-	private LocalDate data;
+	@UpdateTimestamp
+	private LocalDateTime data;
 	
 	@Size(min =10, max = 255 , message = "O atributo aceita minímo 10 e no máximo 255 caractéres")
 	private String foto;
@@ -68,11 +71,11 @@ public class Postagem {
 		this.texto = texto;
 	}
 
-	public LocalDate getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
